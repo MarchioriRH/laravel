@@ -12,7 +12,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::all();
+        $clientes = Cliente::paginate(5);  // Obtener todos los clientes paginados
         return view('cliente.index', compact('clientes'));
         //
     }
@@ -31,14 +31,20 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $clientes = new Cliente();
-        $clientes->nombre = $request->input('nombre');
-        $clientes->telefono = $request->input('telefono');
-        $clientes->email = $request->input('email');
-        $clientes->save();
-        return redirect()->back();
-        //
+        // Validar los datos del formulario
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'telefono' => 'required|string|max:20',
+            'email' => 'required|email|unique:clientes,email',  // Validar el formato y unicidad
+        ]);
+
+        // Crear el cliente utilizando asignación masiva
+        Cliente::create($validated);
+
+        // Redireccionar con un mensaje de éxito
+        return redirect()->back()->with('success', 'Cliente creado con éxito');
     }
+
 
     /**
      * Display the specified resource.
@@ -53,8 +59,7 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        $clientes = Cliente::find($cliente);
-        return view('cliente.edit', compact('clientes'));
+        return view('cliente.edit', compact('cliente'));
         //
     }
 
@@ -63,6 +68,12 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
+        //$clientes = Cliente::find($id);
+        $cliente->nombre = $request->input('nombre');
+        $cliente->telefono = $request->input('telefono');
+        $cliente->email = $request->input('email');
+        $cliente->update();
+        return redirect()->back();
         //
     }
 
@@ -71,6 +82,8 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        //
+        $cliente->delete();  // Eliminar el cliente
+        return redirect()->back()->with('success', 'Cliente eliminado con éxito');
     }
+
 }

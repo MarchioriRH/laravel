@@ -1,15 +1,16 @@
 
   <!-- Modal -->
-  <div class="modal fade" id="create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="edit{{ $cliente->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Agregar cliente</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>          
+          <h5 class="modal-title" id="exampleModalLabel">Editar cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        
-        <form action="{{ route('home.store') }}" method="POST" enctype="multipart/form-data">
+
+        <form action="{{ route('clientes.update', $cliente->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="" class="form-label">Nombre</label>

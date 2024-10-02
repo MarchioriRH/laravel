@@ -20,8 +20,8 @@ Route::resource('home', HomeController::class);
 // Route::get('/home/destroy', [homeController::class, 'destroy'])->name('home.destroy');
 
 
-Route::get('/clientes', [ClienteController::class, 'index'])->name('cliente.index');
 Route::resource('clientes', ClienteController::class);
+Route::get('/clientes', [ClienteController::class, 'index'])->name('cliente.index');
 Route::get('/clientes/create', [ClienteController::class, 'create'])->name('cliente.create');
 Route::get('/clientes/show', [ClienteController::class, 'show'])->name('cliente.show');
 Route::get('/clientes/edit', [ClienteController::class, 'edit'])->name('cliente.edit');

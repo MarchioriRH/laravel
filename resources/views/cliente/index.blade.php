@@ -29,15 +29,24 @@
                                 <td>{{ $cliente->telefono }}</td>
                                 <td>{{ $cliente->email }}</td>
                                 <td>
-                                    <a href="{{ route('cliente.edit', $cliente->id) }}" class="btn btn-primary">Editar</a>
-                                    <a href="{{ route('cliente.destroy', $cliente->id) }}" class="btn btn-danger">Eliminar</a>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit{{ $cliente->id }}">
+                                        Editar
+                                    </button>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{ $cliente->id }}">
+                                        Eliminar
+                                    </button>
                                 </td>
                             </tr>
+                        @include('cliente.edit')
+                        @include('cliente.info')
                         @endforeach
                     </tbody>
                 </table>
             </div>
             @include('cliente.create')
+        </div>
+        <div class="md-4">
+            {{ $clientes->links() }}
         </div>
     </div>
 @endsection
