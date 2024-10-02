@@ -9,6 +9,7 @@
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
                     Nuevo
                 </button>
+                <a href="/home" class="btn btn-warning">Volver</a>
 
                 <table class="table table-striped">
                     <thead>

@@ -14,6 +14,7 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Nombre</label>
                     <input
+                        value={{ $cliente->nombre }}
                         type="text"
                         class="form-control"
                         name="nombre"
@@ -25,6 +26,7 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Telefono</label>
                     <input
+                        value={{ $cliente->telefono }}
                         type="text"
                         class="form-control"
                         name="telefono"
@@ -36,6 +38,7 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Email</label>
                     <input
+                        value={{ $cliente->email }}
                         type="text"
                         class="form-control"
                         name="email"
