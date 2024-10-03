@@ -12,11 +12,19 @@
 <body>
     @extends('layouts.app')
 
-
     @section('content')
-    <div class="md-4 text-center">
-        <a href="/clientes" class="btn btn-primary">Clientes</a>
-    </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <a href="/clientes" class="btn btn-primary">Clientes</a>
+                </div>
+                @if (Auth::user()->role == 'admin')
+                    <div class="col-md-6 text-center">
+                        <a href="/users" class="btn btn-primary">Usuarios</a>
+                    </div>
+                @endif
+            </div>
+        </div>
         @yield('content')
     @endsection
 </body>
