@@ -21,7 +21,7 @@ class RoleMiddleware
         if (Auth::check() && in_array(Auth::user()->role, $roles)) {
             return $next($request);
         }
-
-        return redirect('/'); // Redirigir a la página de inicio si no tiene el rol adecuado
+        
+        return redirect('/home'); // Redirigir a la página de inicio si no tiene el rol adecuado
     }
 }

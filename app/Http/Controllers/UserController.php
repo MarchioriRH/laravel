@@ -60,16 +60,30 @@ class UserController extends Controller
         //
     }
 
+    /**
+     * Activate or deactivate a user.
+     *
+     * This method toggles the 'active' status of a user based on the provided user ID.
+     * If the user is not found, it redirects to the user index route with an error message.
+     * Otherwise, it updates the user's 'active' status and redirects to the user index route
+     * with a success message.
+     *
+     * @param string $id The ID of the user to be activated or deactivated.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+  
     public function activate(string $id)
     {
         $user = User::find($id);
-        if ($user->active == false) {
-            $user->active = true;
-        } else {
-            $user->active = false;
+    
+        if (!$user) {
+            return redirect()->route('user.index')->withErrors('User not found.');
         }
+    
+        $user->active = !$user->active;
         $user->save();
-        return redirect()->route('user.index');
+    
+        return redirect()->route('user.index')->with('status', 'User status updated successfully.');
     }
 
     /**

@@ -1,11 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+
+use App\Http\Kernel;
+
+use App\Http\Middleware\RoleMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['auth', 'role:' . User::ROLE_ADMIN . ',' . User::ROLE_USER])->group(function () {
+Route::middleware(['auth', RoleMiddleware::class . ':' . User::ROLE_ADMIN . ',' . User::ROLE_USER])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('home', HomeController::class);
 
@@ -26,7 +30,7 @@ Route::middleware(['auth', 'role:' . User::ROLE_ADMIN . ',' . User::ROLE_USER])-
     Route::get('/clientes/destroy', [ClienteController::class, 'destroy'])->name('cliente.destroy');
 });
 
-Route::middleware(['auth', 'role:' . User::ROLE_ADMIN])->group(function () {
+Route::middleware(['auth', RoleMiddleware::class . ':' . User::ROLE_ADMIN])->group(function () {
     Route::resource('users', UserController::class);
     Route::get('/users', [UserController::class, 'index'])->name('user.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('user.create');
