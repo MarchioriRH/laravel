@@ -6,9 +6,9 @@
             <div class="col-md-12">
                 <h1>Usuarios</h1>
                 <!-- Button trigger modal -->
-                {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
-                    Nuevo
-                </button> --}}
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#find">
+                    Buscar
+                </button>
                 <a href="/home" class="btn btn-warning">Volver</a>
 
                 <table class="table table-striped">
@@ -43,15 +43,16 @@
                                         </button>
                                     </form>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit{{ $user->id }}">
-                                        Editar
+                                        Asignar rol
                                     </button>
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{ $user->id }}">
                                         Eliminar
                                     </button>
                                 </td>
                             </tr>
-                        {{-- @include('cliente.edit')
-                        @include('cliente.info') --}}
+                        @include('user.rol-asign')
+                        @include('user.delete')
+                        @include('user.find')
                         @endforeach
                     </tbody>
                 </table>

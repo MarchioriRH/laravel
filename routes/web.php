@@ -39,6 +39,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':' . User::ROLE_ADMIN])->gro
     Route::get('/users/update', [UserController::class, 'update'])->name('user.update');
     Route::get('/users/destroy', [UserController::class, 'destroy'])->name('user.destroy');
     Route::patch('/users/activate/{id}', [UserController::class, 'activate'])->name('users.activate');
+    Route::get('/users/find', [UserController::class, 'find'])->name('user.find');
 });
 
 Route::get('/wait-for-activation', function () {

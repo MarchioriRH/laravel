@@ -38,7 +38,7 @@
                                 </td>
                             </tr>
                         @include('cliente.edit')
-                        @include('cliente.info')
+                        @include('cliente.delete')
                         @endforeach
                     </tbody>
                 </table>

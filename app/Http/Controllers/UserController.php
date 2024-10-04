@@ -52,9 +52,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::find($id);
         $user->update($request->all());
         return redirect()->route('user.index');
         //
@@ -71,26 +70,34 @@ class UserController extends Controller
      * @param string $id The ID of the user to be activated or deactivated.
      * @return \Illuminate\Http\RedirectResponse
      */
-  
-    public function activate(string $id)
+
+    public function activate(String $id)
     {
         $user = User::find($id);
-    
         if (!$user) {
             return redirect()->route('user.index')->withErrors('User not found.');
         }
-    
+
         $user->active = !$user->active;
         $user->save();
-    
+
         return redirect()->route('user.index')->with('status', 'User status updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
+        $user->delete();
+        return redirect()->route('user.index');
         //
+    }
+
+    // TODO: Implement the find method
+    public function findByName(Request $request)
+    {
+        $users = User::where('name', 'like', '%' . $request->name . '%')->get();
+        return view('user.find');
     }
 }
