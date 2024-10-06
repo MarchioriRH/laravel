@@ -1,4 +1,4 @@
-@extends( 'home' )
+@extends( 'layouts.app' )
 
 @section('content')
     <div class="container">
@@ -35,7 +35,7 @@
                                 <td>{{ $user->created_at }}</td>
                                 <td>{{ $user->updated_at }}</td>
                                 <td>
-                                    <form action="{{ route('users.activate', $user->id) }}" method="POST">
+                                    <form action="{{ route('user.activate', $user->id) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit" class="btn btn-success">
@@ -57,7 +57,6 @@
                     </tbody>
                 </table>
             </div>
-            {{-- @include('cliente.create') --}}
         </div>
         <div class="md-4">
             {{ $users->links() }}

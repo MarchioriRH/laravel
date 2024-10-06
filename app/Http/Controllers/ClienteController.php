@@ -42,6 +42,7 @@ class ClienteController extends Controller
         Cliente::create($validated);
 
         // Redireccionar con un mensaje de éxito
+        session()->flash('success', 'Cliente creado con éxito');
         return redirect()->back()->with('success', 'Cliente creado con éxito');
     }
 

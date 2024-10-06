@@ -95,9 +95,27 @@ class UserController extends Controller
     }
 
     // TODO: Implement the find method
-    public function findByName(Request $request)
+    public function find(Request $request)
     {
-        $users = User::where('name', 'like', '%' . $request->name . '%')->get();
-        return view('user.find');
+        print($request);
+        $request->validate([
+            'dataToFind' => 'required|string',
+            'data' => 'required|string',
+        ]);
+
+        // Realizar la búsqueda
+        if ($request->dataToFind === 'active') {
+            $users = User::where('active', $request->data)->get();
+        } elseif ($request->dataToFind === 'inactive') {
+            $users = User::where('active', '!=', $request->data)->get();
+        } else {
+            $users = User::where($request->dataToFind, 'like', '%' . $request->data . '%')->get();
+        }
+
+        $users = 'SELECT * FROM users WHERE ' . $request->dataToFind . ' LIKE "%' . $request->data . '%"';
+
+        session()->flash('message', 'Búsqueda realizada con éxito');
+        // Retornar la vista con los resultados
+        return redirect()->route('user.index');
     }
 }
