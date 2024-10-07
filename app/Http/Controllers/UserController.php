@@ -94,28 +94,46 @@ class UserController extends Controller
         //
     }
 
-    // TODO: Implement the find method
-    public function find(Request $request)
+    /**
+     * Search for a user based on the provided data.
+     *
+     * This method searches for a user based on the provided data and dataToFind parameters.
+     * If the dataToFind parameter is 'active', it searches for users with the provided active status.
+     * If the dataToFind parameter is 'inactive', it searches for users with the opposite active status.
+     * Otherwise, it searches for users with the provided data in the specified field.
+     * The search results are then displayed on the user index view.
+     *
+     * @param \Illuminate\Http\Request $request The request object containing the search parameters.
+     * @return \Illuminate\Contracts\View\View The user index view with the search results.
+     */
+    public function search(Request $request, User $user)
     {
-        print($request);
+        print_r($user);
         $request->validate([
             'dataToFind' => 'required|string',
             'data' => 'required|string',
         ]);
 
+        $query = User::query();
         // Realizar la búsqueda
         if ($request->dataToFind === 'active') {
-            $users = User::where('active', $request->data)->get();
+            $query->where('active', $request->data)->get();
         } elseif ($request->dataToFind === 'inactive') {
-            $users = User::where('active', '!=', $request->data)->get();
+            $query->where('active', '!=', $request->data)->get();
         } else {
-            $users = User::where($request->dataToFind, 'like', '%' . $request->data . '%')->get();
+            $query->where($request->dataToFind, 'like', '%' . $request->data . '%')->get();
         }
 
-        $users = 'SELECT * FROM users WHERE ' . $request->dataToFind . ' LIKE "%' . $request->data . '%"';
+        $users = $query->paginate(5);
 
-        session()->flash('message', 'Búsqueda realizada con éxito');
+         // Verificar si se encontraron usuarios
+         if ($users->isEmpty()) {
+            session()->flash('message', 'No se encontraron usuarios.');
+        } else {
+            session()->flash('message', 'Búsqueda realizada con éxito.');
+        }
+
         // Retornar la vista con los resultados
-        return redirect()->route('user.index');
+        return view('user.index', compact('users'));	
     }
 }

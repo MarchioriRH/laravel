@@ -1,6 +1,6 @@
 
   <!-- Modal -->
-  <div class="modal fade" id="find" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="search" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -8,7 +8,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form action="{{ route('user.find') }}" method="GET" enctype="multipart/form-data">
+        <form action="{{ route('user.search') }}" method="GET" enctype="multipart/form-data">
             @csrf
             <div class="modal-body">
                 <label for="" class="form-label">Buscar</label>

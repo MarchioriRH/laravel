@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <h1>Usuarios</h1>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#find">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#search">
                     Buscar
                 </button>
                 <a href="/home" class="btn btn-warning">Volver</a>
@@ -52,7 +52,7 @@
                             </tr>
                         @include('user.rol-asign')
                         @include('user.delete')
-                        @include('user.find')
+                        @include('user.search')
                         @endforeach
                     </tbody>
                 </table>
