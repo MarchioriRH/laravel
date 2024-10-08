@@ -6,9 +6,12 @@
             <div class="col-md-12">
                 <h1>Usuarios</h1>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#search">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#search">Buscar</button>
+                {{-- <form action="{{ route('user.search', '1') }}" method="GET" >
+                    <button type="submit" class="btn btn-primary" >
                     Buscar
-                </button>
+                    </button>
+                </form> --}}
                 <a href="/home" class="btn btn-warning">Volver</a>
 
                 <table class="table table-striped">

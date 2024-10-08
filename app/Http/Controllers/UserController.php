@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Dotenv\Util\Str;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -106,22 +107,28 @@ class UserController extends Controller
      * @param \Illuminate\Http\Request $request The request object containing the search parameters.
      * @return \Illuminate\Contracts\View\View The user index view with the search results.
      */
-    public function search(Request $request, User $user)
+    public function search(Request $request, String $dataToFind, String $data)
     {
-        print_r($user);
+        dd($request->all());
+
+
         $request->validate([
             'dataToFind' => 'required|string',
             'data' => 'required|string',
         ]);
 
+        $dataToFind = $dataToFind;
+        $data = $data;
+
+
         $query = User::query();
         // Realizar la búsqueda
-        if ($request->dataToFind === 'active') {
-            $query->where('active', $request->data)->get();
-        } elseif ($request->dataToFind === 'inactive') {
-            $query->where('active', '!=', $request->data)->get();
+        if ($dataToFind === 'active') {
+            $query->where('active', $data)->get();
+        } elseif ($dataToFind === 'inactive') {
+            $query->where('active', '!=', $data)->get();
         } else {
-            $query->where($request->dataToFind, 'like', '%' . $request->data . '%')->get();
+            $query->where($dataToFind, 'like', '%' . $data . '%')->get();
         }
 
         $users = $query->paginate(5);
@@ -134,6 +141,7 @@ class UserController extends Controller
         }
 
         // Retornar la vista con los resultados
-        return view('user.index', compact('users'));	
+        //$users = User::where('id', 'like', '%' . $user . '%')->paginate(5);
+        return view('user.index', compact('users'));
     }
 }

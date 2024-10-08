@@ -8,7 +8,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form action="{{ route('user.search') }}" method="GET" enctype="multipart/form-data">
+        <form id="searchForm" >
             @csrf
             <div class="modal-body">
                 <label for="" class="form-label">Buscar</label>
@@ -34,9 +34,22 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Buscar</button>
+                <button type="button" class="btn btn-primary" id="searchButton">Buscar</a>
             </div>
 
         </form>
     </div>
   </div>
+  <script>
+    document.getElementById('searchButton').addEventListener('click', function() {
+        // Obtener los valores del formulario
+        var dataToFind = document.querySelector('select[name="dataToFind"]').value;
+        var data = document.querySelector('input[name="data"]').value;
+
+        // Construir la URL
+        var url = '/users/search?dataToFind=' + encodeURIComponent(dataToFind) + '&data=' + encodeURIComponent(data);
+
+        // Redirigir a la URL
+        window.location.href = url;
+    });
+</script>
