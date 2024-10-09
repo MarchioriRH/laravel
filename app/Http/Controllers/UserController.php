@@ -107,7 +107,7 @@ class UserController extends Controller
      * @param \Illuminate\Http\Request $request The request object containing the search parameters.
      * @return \Illuminate\Contracts\View\View The user index view with the search results.
      */
-    public function search(Request $request, String $dataToFind, String $data)
+    public function search(Request $request)
     {
         dd($request->all());
 
@@ -117,9 +117,8 @@ class UserController extends Controller
             'data' => 'required|string',
         ]);
 
-        $dataToFind = $dataToFind;
-        $data = $data;
-
+        $dataToFind = $request->input('dataToFind');
+        $data = $request->input('data');
 
         $query = User::query();
         // Realizar la búsqueda
@@ -133,8 +132,8 @@ class UserController extends Controller
 
         $users = $query->paginate(5);
 
-         // Verificar si se encontraron usuarios
-         if ($users->isEmpty()) {
+        // Verificar si se encontraron usuarios
+        if ($users->isEmpty()) {
             session()->flash('message', 'No se encontraron usuarios.');
         } else {
             session()->flash('message', 'Búsqueda realizada con éxito.');
@@ -143,5 +142,10 @@ class UserController extends Controller
         // Retornar la vista con los resultados
         //$users = User::where('id', 'like', '%' . $user . '%')->paginate(5);
         return view('user.index', compact('users'));
+    }
+
+    public function showForm()
+    {
+        return view('user.search');
     }
 }

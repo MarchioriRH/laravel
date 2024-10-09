@@ -6,12 +6,20 @@
             <div class="col-md-12">
                 <h1>Usuarios</h1>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#search">Buscar</button>
-                {{-- <form action="{{ route('user.search', '1') }}" method="GET" >
-                    <button type="submit" class="btn btn-primary" >
+                {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#search">Buscar</button> --}}
+               
+                {{-- <button type="button" class="btn btn-primary" onclick="window.location='{{ route('user.showForm') }}'">
                     Buscar
+                </button> --}}
+
+                <form action="{{ route('user.showForm') }}" method="GET">
+                    @csrf
+                    
+                    <button type="submit" class="btn btn-success">
+                        Buscar
                     </button>
-                </form> --}}
+                </form>
+
                 <a href="/home" class="btn btn-warning">Volver</a>
 
                 <table class="table table-striped">
@@ -55,7 +63,7 @@
                             </tr>
                         @include('user.rol-asign')
                         @include('user.delete')
-                        @include('user.search')
+                        {{-- @include('user.search') --}}
                         @endforeach
                     </tbody>
                 </table>
