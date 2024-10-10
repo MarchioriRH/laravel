@@ -109,9 +109,7 @@ class UserController extends Controller
      */
     public function search(Request $request)
     {
-        dd($request->all());
-
-
+        // Validar los datos de la solicitud
         $request->validate([
             'dataToFind' => 'required|string',
             'data' => 'required|string',

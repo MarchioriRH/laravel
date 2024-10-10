@@ -1,12 +1,13 @@
 
 <!-- Modal -->
-@extends( 'layouts.app' )
-
-@section('content')
-  <div class="container">
-    <div class="card">
-      <div class="card-body">
-        <form id="searchForm" mehtod="GET" >
+<div class="modal fade" id="searchForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">Buscar usuarios</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form id="searchForm" action="{{ route('user.search') }}" mehtod="GET" >
             @csrf
             <div>  
                 <label for="" class="form-label">Buscar</label>
@@ -29,14 +30,14 @@
                         placeholder="Ingrese el dato a buscar"
                     />
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="searchButton">Buscar</a>
-            </div>
-        </form>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
+                    <button type="submit" class="btn btn-primary" id="searchButton">Buscar</a>
+                </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
- @endsection
+</div>
 

@@ -7,21 +7,27 @@
                 <h1>Usuarios</h1>
                 <!-- Button trigger modal -->
                 {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#search">Buscar</button> --}}
-               
-                {{-- <button type="button" class="btn btn-primary" onclick="window.location='{{ route('user.showForm') }}'">
+{{--                
+                <button type="button" class="btn btn-primary" onclick="window.location='{{ route('user.showForm') }}'">
                     Buscar
                 </button> --}}
-
-                <form action="{{ route('user.showForm') }}" method="GET">
-                    @csrf
-                    
-                    <button type="submit" class="btn btn-success">
-                        Buscar
-                    </button>
-                </form>
-
-                <a href="/home" class="btn btn-warning">Volver</a>
-
+                <div class="container p-4">
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            {{-- <form action="{{ route('user.showForm') }}" >
+                                @csrf
+                                
+                                <button type="submit" class="btn btn-success">
+                                    Buscar
+                                </button>
+                            </form> --}}
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchForm">Buscar</button>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <a href="/home" class="btn btn-warning">Volver</a>
+                        </div>
+                    </div>
+                </div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -42,7 +48,7 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>
-                                <td>{{ $user->active }}</td>
+                                <td>{{ $user->active ? 'Si' : 'No' }}</td>
                                 <td>{{ $user->created_at }}</td>
                                 <td>{{ $user->updated_at }}</td>
                                 <td>
@@ -63,7 +69,7 @@
                             </tr>
                         @include('user.rol-asign')
                         @include('user.delete')
-                        {{-- @include('user.search') --}}
+                        @include('user.search') 
                         @endforeach
                     </tbody>
                 </table>
