@@ -22,10 +22,9 @@ Route::middleware(['auth', RoleMiddleware::class . ':' . User::ROLE_ADMIN . ',' 
 
 Route::middleware(['auth', RoleMiddleware::class . ':' . User::ROLE_ADMIN])->group(function () {
     Route::resource('users', UserController::class);
-    Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    //Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::patch('/activate/{id}', [UserController::class, 'activate'])->name('user.activate');
     Route::get('/search', [UserController::class, 'search'])->name('user.search');
-    Route::get('/search-form', [UserController::class, 'showForm'])->name('user.showForm');
 });
 
 Route::get('/wait-for-activation', function () {

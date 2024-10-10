@@ -5,27 +5,21 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Usuarios</h1>
-                <!-- Button trigger modal -->
-                {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#search">Buscar</button> --}}
-{{--                
-                <button type="button" class="btn btn-primary" onclick="window.location='{{ route('user.showForm') }}'">
-                    Buscar
-                </button> --}}
                 <div class="container p-4">
                     <div class="row">
+
+                        @if (isset($isSearch) && $isSearch)
                         <div class="col-md-6 text-center">
-                            {{-- <form action="{{ route('user.showForm') }}" >
-                                @csrf
-                                
-                                <button type="submit" class="btn btn-success">
-                                    Buscar
-                                </button>
-                            </form> --}}
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchForm">Buscar</button>
+                            <a href="/users" class="btn btn-warning">Volver</a>
                         </div>
-                        <div class="col-md-6 text-center">
-                            <a href="/home" class="btn btn-warning">Volver</a>
-                        </div>
+                        @else
+                            <div class="col-md-6 text-center">                           
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchForm">Buscar</button>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <a href="/home" class="btn btn-warning">Volver</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <table class="table table-striped">
@@ -67,16 +61,16 @@
                                     </button>
                                 </td>
                             </tr>
-                        @include('user.rol-asign')
-                        @include('user.delete')
-                        @include('user.search') 
-                        @endforeach
-                    </tbody>
-                </table>
+                            @include('user.rol-asign')
+                            @include('user.delete')
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @include('user.search') 
+            <div class="md-4">
+                {{ $users->links() }}
             </div>
         </div>
-        <div class="md-4">
-            {{ $users->links() }}
-        </div>
-    </div>
 @endsection

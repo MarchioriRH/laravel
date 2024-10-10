@@ -82,7 +82,7 @@ class UserController extends Controller
         $user->active = !$user->active;
         $user->save();
 
-        return redirect()->route('user.index')->with('status', 'User status updated successfully.');
+        return redirect()->back()->with('status', 'User status updated successfully.');
     }
 
     /**
@@ -91,7 +91,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('user.index');
+        return redirect()->back()->with('status', 'User deleted successfully.');
         //
     }
 
@@ -109,6 +109,7 @@ class UserController extends Controller
      */
     public function search(Request $request)
     {
+        print_r($request->all());
         // Validar los datos de la solicitud
         $request->validate([
             'dataToFind' => 'required|string',
@@ -137,13 +138,7 @@ class UserController extends Controller
             session()->flash('message', 'Búsqueda realizada con éxito.');
         }
 
-        // Retornar la vista con los resultados
-        //$users = User::where('id', 'like', '%' . $user . '%')->paginate(5);
-        return view('user.index', compact('users'));
-    }
-
-    public function showForm()
-    {
-        return view('user.search');
+        // Retornar la vista con los resultados de la búsqueda
+        return view('user.index', compact('users'))->with('isSearch', true);
     }
 }

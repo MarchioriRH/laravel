@@ -11,7 +11,7 @@
             @csrf
             <div>  
                 <label for="" class="form-label">Buscar</label>
-                <select class="form-select" name="dataToFind" aria-label="Seleccionar tipo de busqueda">
+                <select class="form-select" id="dataToFind" aria-label="Seleccionar tipo de busqueda">
                     <option value="id">id</option>
                     <option value="name">Nombre</option>
                     <option value="email">Email</option>
@@ -19,7 +19,10 @@
                     <option value="active">Activo</option>
                     <option value="inactive">Inactivo</option>
                 </select>
-                <div class="mb-3">
+                <div class="mb-3" id="dynamicInput">
+                  <!-- Campo de entrada dinámico -->
+                </div>
+                {{-- <div class="mb-3">
                     <label for="" class="form-label">Dato</label>
                     <input
                         type="text"
@@ -29,7 +32,7 @@
                         aria-describedby="helpId"
                         placeholder="Ingrese el dato a buscar"
                     />
-                </div>
+                </div> --}}
                 <div class="modal-footer">
                     <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
                     <button type="submit" class="btn btn-primary" id="searchButton">Buscar</a>
@@ -40,4 +43,4 @@
     </div>
   </div>
 </div>
-
+<script src="{{ asset('js/searchForm.js') }}"></script>
