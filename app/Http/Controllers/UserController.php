@@ -109,7 +109,7 @@ class UserController extends Controller
      */
     public function search(Request $request)
     {
-        print_r($request->all());
+        //dd($request->all());
         // Validar los datos de la solicitud
         $request->validate([
             'dataToFind' => 'required|string',
@@ -121,13 +121,8 @@ class UserController extends Controller
 
         $query = User::query();
         // Realizar la búsqueda
-        if ($dataToFind === 'active') {
-            $query->where('active', $data)->get();
-        } elseif ($dataToFind === 'inactive') {
-            $query->where('active', '!=', $data)->get();
-        } else {
-            $query->where($dataToFind, 'like', '%' . $data . '%')->get();
-        }
+
+        $query->where($dataToFind, 'like', '%' . $data . '%')->get();
 
         $users = $query->paginate(5);
 

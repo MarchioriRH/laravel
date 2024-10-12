@@ -17,6 +17,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 <option value="guest">Visitante</option>
             `;
             dynamicInput.appendChild(select);
+        } else if (this.value === 'active') {
+            // Crear un select para status
+            var select = document.createElement('select');
+            select.name = 'data';
+            select.className = 'form-select';
+            select.innerHTML = `
+                <option value="1">Activo</option>
+                <option value="0">Inactivo</option>
+            `;
+            dynamicInput.appendChild(select);
         } else {
             // Crear un input de texto
             var input = document.createElement('input');

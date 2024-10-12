@@ -13,7 +13,7 @@
                             <a href="/users" class="btn btn-warning">Volver</a>
                         </div>
                         @else
-                            <div class="col-md-6 text-center">                           
+                            <div class="col-md-6 text-center">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchForm">Buscar</button>
                             </div>
                             <div class="col-md-6 text-center">
@@ -43,8 +43,8 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>
                                 <td>{{ $user->active ? 'Si' : 'No' }}</td>
-                                <td>{{ $user->created_at }}</td>
-                                <td>{{ $user->updated_at }}</td>
+                                <td>{{ Date::parse($user->created_at)->ago() }}</td>
+                                <td>{{ Date::parse($user->updated_at)->ago() }}</td>
                                 <td>
                                     <form action="{{ route('user.activate', $user->id) }}" method="POST">
                                         @csrf
@@ -68,7 +68,7 @@
                     </table>
                 </div>
             </div>
-            @include('user.search') 
+            @include('user.search')
             <div class="md-4">
                 {{ $users->links() }}
             </div>
