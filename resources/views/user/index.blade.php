@@ -9,15 +9,18 @@
                     <div class="row">
 
                         @if (isset($isSearch) && $isSearch)
-                        <div class="col-md-6 text-center">
-                            <a href="/users" class="btn btn-warning">Volver</a>
-                        </div>
+                            <div class="col-md-4 text-center">
+                                <a href="/users" class="btn btn-warning">Volver</a>
+                            </div>
                         @else
-                            <div class="col-md-6 text-center">
+                            <div class="col-md-4 text-center">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchForm">Buscar</button>
                             </div>
-                            <div class="col-md-6 text-center">
+                            <div class="col-md-4 text-center">
                                 <a href="/home" class="btn btn-warning">Volver</a>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <a type="button" class="btn btn-secondary" href="{{ route('reports.users') }}">Descargar informe</a>
                             </div>
                         @endif
                     </div>
