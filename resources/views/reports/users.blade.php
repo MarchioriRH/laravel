@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <img src="../public/images/logo.png" alt="Logo Municipalidad de Rauch" width="100" height="100">
-    <title>Informe de Usuarios</title>
-    <style>
+    <title>Informe de usuarios</title>
+    <link href="{{ public_path('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    {{-- <style>
         table {
             width: 100%;
             border-collapse: collapse;
@@ -15,11 +15,14 @@
             padding: 8px;
             text-align: left;
         }
-    </style>
+    </style> --}}
 </head>
 <body>
-    <h1>Informe de Usuarios</h1>
-    <table>
+    <div class="container mt-5">
+        <img src="../public/images/logo.png" alt="Logo Municipalidad de Rauch" class="img-thumbnail"  width="200" height="100">
+    </div>
+    <h1 class="text-center">Informe de Usuarios</h1>
+    <table class="table table-bordered border-dark">
         <thead>
             <tr>
                 <th>ID</th>
@@ -41,5 +44,6 @@
             @endforeach
         </tbody>
     </table>
+    <script src="{{ asset('js/reportTargetBlank.js') }}"></script>
 </body>
 </html>

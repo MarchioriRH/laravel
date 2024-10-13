@@ -7,7 +7,6 @@
                 <h1>Usuarios</h1>
                 <div class="container p-4">
                     <div class="row">
-
                         @if (isset($isSearch) && $isSearch)
                             <div class="col-md-4 text-center">
                                 <a href="/users" class="btn btn-warning">Volver</a>
@@ -19,10 +18,13 @@
                             <div class="col-md-4 text-center">
                                 <a href="/home" class="btn btn-warning">Volver</a>
                             </div>
-                            <div class="col-md-4 text-center">
-                                <a type="button" class="btn btn-secondary" href="{{ route('reports.users') }}">Descargar informe</a>
-                            </div>
                         @endif
+                        <div class="col-md-4 text-center">
+                            <form id="reportForm" action="{{ route('reports.users', ['users' => $users->pluck('id')->implode(',')]) }}" method="GET" target="_blank">
+                                @csrf
+                                <button type="submit" class="btn btn-secondary">Descargar informe</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <table class="table table-striped">
