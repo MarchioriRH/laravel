@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ClienteController extends Controller
 {
@@ -12,9 +13,13 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::paginate(5);  // Obtener todos los clientes paginados
-        return response()->view('cliente.index', compact('clientes'), 200);
-        //
+        try {
+            $clientes = Cliente::paginate(5);  // Obtener todos los clientes paginados
+            return response()->view('cliente.index', compact('clientes'));
+        } catch (\Exception $e) {
+            Log::error('Error in ClienteController@index: ' . $e->getMessage());
+            return response()->view('errors.500', [], 500);
+        }
     }
 
     /**
@@ -43,7 +48,7 @@ class ClienteController extends Controller
 
         // Redireccionar con un mensaje de éxito
         session()->flash('success', 'Cliente creado con éxito');
-        return redirect()->back()->with('success', 'Cliente creado con éxito');
+        return redirect(200)->back()->with('success', 'Cliente creado con éxito');
     }
 
 

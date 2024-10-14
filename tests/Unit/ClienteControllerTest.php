@@ -11,17 +11,17 @@ use App\Models\User;
 
 
 class ClienteControllerTest extends TestCase
-{ 
+{
 
-  
+
     /**
      * Test index method.
      */
     public function testIndex()
     {
-        $user = User::factory()->createOne();
-        $this->actingAs($user);
-        $this->withoutMiddleware();     
+        // $user = User::factory()->createOne();
+        // $this->actingAs($user);
+         $this->withoutMiddleware();
 
         Cliente::factory()->count(10)->create();
 
