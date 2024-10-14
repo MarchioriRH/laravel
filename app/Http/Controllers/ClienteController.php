@@ -13,7 +13,7 @@ class ClienteController extends Controller
     public function index()
     {
         $clientes = Cliente::paginate(5);  // Obtener todos los clientes paginados
-        return view('cliente.index', compact('clientes'));
+        return response()->view('cliente.index', compact('clientes'), 200);
         //
     }
 

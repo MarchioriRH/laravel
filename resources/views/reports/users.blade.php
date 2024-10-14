@@ -3,7 +3,7 @@
 <head>
     <title>Informe de usuarios</title>
     <link href="{{ public_path('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
-    {{-- <style>
+    <style>
         table {
             width: 100%;
             border-collapse: collapse;
@@ -15,35 +15,44 @@
             padding: 8px;
             text-align: left;
         }
-    </style> --}}
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <img src="../public/images/logo.png" alt="Logo Municipalidad de Rauch" class="img-thumbnail"  width="200" height="100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="../public/images/logo.png" alt="Logo Municipalidad de Rauch" class="img-thumbnail"  width="200" height="100">
+                <span class="text-center">
+                    <h1>Informe de Usuarios</h1>
+                </span>
+            </div>
+    
+            <div class="container mt-5">
+                <table class="table table-bordered border-dark">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Rol</th>
+                            <th>Activo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($users as $user)
+                            <tr>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->role }}</td>
+                                <td>{{ $user->active ? 'Sí' : 'No' }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <h1 class="text-center">Informe de Usuarios</h1>
-    <table class="table table-bordered border-dark">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Rol</th>
-                <th>Activo</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($users as $user)
-                <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->role }}</td>
-                    <td>{{ $user->active ? 'Sí' : 'No' }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
     <script src="{{ asset('js/reportTargetBlank.js') }}"></script>
 </body>
 </html>
