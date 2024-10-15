@@ -62,6 +62,22 @@ class LoginController extends Controller
     {
         $user = \App\Models\User::where('email', $request->email)->first();
 
+        if (!$user) {
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    $this->username() => __('The provided credentials are incorrect.'),
+                ]);
+        }
+        
+        if ($user && $request->password) {
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    $this->username() => __('The provided credentials are incorrect.'),
+                ]);
+        }
+
         if ($user && !$user->active) {
             return redirect()->back()
                 ->withInput($request->only($this->username(), 'remember'))
@@ -69,6 +85,7 @@ class LoginController extends Controller
                     $this->username() => __('Your account is not activated yet. Please wait for an administrator to activate your account.'),
                 ]);
         }
+
 
         return parent::sendFailedLoginResponse($request);
     }
